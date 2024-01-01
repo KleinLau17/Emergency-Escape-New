@@ -127,6 +127,10 @@ public class PlayerGun : MonoBehaviour
         Transform sparks = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(sparks.gameObject, 0.2f);
 
+        //÷∆‘Ï…À∫¶
+        IDamageable damageable = hit.transform.transform.GetComponent<IDamageable>();
+        damageable?.TakeDamage(10);
+
         MuzzleFlash();
     }
 
