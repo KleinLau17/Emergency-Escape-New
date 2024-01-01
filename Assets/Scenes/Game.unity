@@ -285,12 +285,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808806182}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.141, y: 0.388, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1059532940}
+  m_Father: {fileID: 1890709448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1059532936
 GameObject:
@@ -303,10 +303,8 @@ GameObject:
   - component: {fileID: 1059532940}
   - component: {fileID: 1059532939}
   - component: {fileID: 1059532938}
-  - component: {fileID: 1059532937}
-  - component: {fileID: 1059532941}
   - component: {fileID: 1059532942}
-  - component: {fileID: 1059532943}
+  - component: {fileID: 1059532941}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -314,19 +312,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1059532937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1059532936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0d9414556853d84b8c01e944540c2a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 6
 --- !u!50 &1059532938
 Rigidbody2D:
   serializedVersion: 4
@@ -419,7 +404,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 808806183}
+  - {fileID: 1890709448}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1059532941
@@ -452,24 +437,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1059532936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db8b623a8fc7594a82fc87de5a8b63e, type: 3}
+  m_Script: {fileID: 11500000, guid: a0d9414556853d84b8c01e944540c2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1059532943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1059532936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b61f7fa3d58a641872d49e032deae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 808806183}
-  shootTrail: {fileID: 6225822724369015661, guid: 1ec7ea88dc1a42142aa15d90915830f8, type: 3}
-  muzzleFlash: {fileID: 8160183899519653161, guid: d068bd82e315bd248b531ede90f11425, type: 3}
+  moveSpeed: 12
 --- !u!1 &1178658930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,6 +2150,63 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1890709447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1890709448}
+  - component: {fileID: 1890709449}
+  m_Layer: 0
+  m_Name: Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1890709448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890709447}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 808806183}
+  m_Father: {fileID: 1059532940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1890709449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890709447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b61f7fa3d58a641872d49e032deae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 1059532942}
+  firePoint: {fileID: 808806183}
+  shootTrail: {fileID: 6225822724369015661, guid: 1ec7ea88dc1a42142aa15d90915830f8, type: 3}
+  muzzleFlash: {fileID: 8160183899519653161, guid: d068bd82e315bd248b531ede90f11425, type: 3}
+  FireMode: 1
+  isReloading: 0
+  nextShotTime: 0
+  shotsNumber: 0
+  clipSize: 7
+  fireRate: 1
+  reloadTime: 1
+  isTriggerReleased: 0
 --- !u!1 &1910145710
 GameObject:
   m_ObjectHideFlags: 0
