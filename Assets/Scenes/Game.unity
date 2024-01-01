@@ -2204,7 +2204,7 @@ MonoBehaviour:
   nextShotTime: 0
   shotsNumber: 0
   clipSize: 7
-  fireRate: 1
+  fireRate: 2
   reloadTime: 1
   isTriggerReleased: 0
 --- !u!1 &1910145710

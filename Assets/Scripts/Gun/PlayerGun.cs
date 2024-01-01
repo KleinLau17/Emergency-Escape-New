@@ -33,10 +33,10 @@ public class PlayerGun : MonoBehaviour
         {
             case FireMode.Single:
                 {
+                    playerController.SetShootingState(false);
                     if (!isTriggerReleased) return;
                     Shoot(mousePosition);
                     isTriggerReleased = false;
-                    playerController.SetShootingState(false);
                     break;
                 }
             case FireMode.Burst:
@@ -56,10 +56,7 @@ public class PlayerGun : MonoBehaviour
     public void OnTriggerRelease(){
         Debug.Log("松开扳机");
         isTriggerReleased = true;
-        if (FireMode == FireMode.Burst)
-        {
-            playerController.SetShootingState(false);
-        }
+        playerController.SetShootingState(false);
     }
 
     public void Reload(){
@@ -68,8 +65,10 @@ public class PlayerGun : MonoBehaviour
 
     private IEnumerator ReloadCoroutine()
     {
+        // TODO 装弹动画
         Debug.Log("重新装弹");
         isReloading = true;
+        playerController.SetShootingState(false);
         yield return new WaitForSeconds(reloadTime);
         shotsNumber = 0;
         isReloading = false;
