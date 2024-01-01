@@ -9,6 +9,8 @@ public class LivingEntity : MonoBehaviour, IDamageable
     protected float Health { get; private set; }
     protected bool IsDead;
 
+    public ParticleSystem deathParticle;
+
     public event Action OnDeath;
 
     protected virtual void Start()
@@ -26,5 +28,14 @@ public class LivingEntity : MonoBehaviour, IDamageable
         OnDeath?.Invoke();
 
         Destroy(gameObject);
+
+        //À¿ÕˆÃÿ–ß
+        if (deathParticle == null)
+        {
+            return;
+        }
+
+        ParticleSystem ps = Instantiate(deathParticle, transform.position, Quaternion.identity);
+        Destroy(ps.gameObject, ps.main.duration);
     }
 }

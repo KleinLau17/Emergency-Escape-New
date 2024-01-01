@@ -28,6 +28,8 @@ public class Beetle : LivingEntity
     {
         if (target == null)
         {
+            aiPath.destination = transform.position;
+            _animator.SetBool("IsMoving", false);
             return;
         }
 

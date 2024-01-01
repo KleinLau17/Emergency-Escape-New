@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2975647457960033763}
   - component: {fileID: 2037856700483804432}
   - component: {fileID: 5349838992839696889}
+  - component: {fileID: 7334725054791260753}
   m_Layer: 6
   m_Name: Beetle
   m_TagString: Untagged
@@ -228,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 20
+  deathParticle: {fileID: 2355207476794573465, guid: f2accf878853ecd4e880bcb790159951, type: 3}
   target: {fileID: 0}
   aiPath: {fileID: 2037856700483804432}
   whatToHit:
@@ -235,3 +237,30 @@ MonoBehaviour:
     m_Bits: 512
   damage: 10
   hitRate: 1
+--- !u!50 &7334725054791260753
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5200658730813400603}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 3
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

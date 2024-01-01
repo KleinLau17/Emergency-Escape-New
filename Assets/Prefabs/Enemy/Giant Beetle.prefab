@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8731116482350826868}
   - component: {fileID: 1985781835570136107}
   - component: {fileID: 5683238779387914437}
+  - component: {fileID: 1396816924188016791}
   m_Layer: 6
   m_Name: Giant Beetle
   m_TagString: Untagged
@@ -228,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 50
+  deathParticle: {fileID: 2355207476794573465, guid: f2accf878853ecd4e880bcb790159951, type: 3}
   target: {fileID: 0}
   aiPath: {fileID: 1985781835570136107}
   whatToHit:
@@ -235,3 +237,30 @@ MonoBehaviour:
     m_Bits: 512
   damage: 20
   hitRate: 1.5
+--- !u!50 &1396816924188016791
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424168634908207850}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 3
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -129,8 +129,12 @@ public class PlayerGun : MonoBehaviour
 
         //÷∆‘Ï…À∫¶
         IDamageable damageable = hit.transform.transform.GetComponent<IDamageable>();
-        damageable?.TakeDamage(10);
-
+        if (damageable != null)
+        {
+            damageable.TakeDamage(10);
+            PopupText.Create(hit.point, Random.Range(1, 100), Random.Range(0, 100) < 30);
+        }
+        
         MuzzleFlash();
     }
 
