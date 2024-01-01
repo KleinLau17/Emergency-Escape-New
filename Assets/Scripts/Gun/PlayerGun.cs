@@ -9,8 +9,11 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform shootTrail;
     [SerializeField] private Transform muzzleFlash;
+    [SerializeField] private Transform hitParticle;
 
     //武器系统
+    [Header("武器属性")]
+    public LayerMask whatToHit;
     public FireMode FireMode = FireMode.Burst;
     public bool isReloading;
     public float nextShotTime;
@@ -59,6 +62,7 @@ public class PlayerGun : MonoBehaviour
         playerController.SetShootingState(false);
     }
 
+    #region 装弹
     public void Reload(){
         StartCoroutine(ReloadCoroutine());
     }
@@ -74,6 +78,9 @@ public class PlayerGun : MonoBehaviour
         isReloading = false;
     }
 
+    #endregion
+
+    #region 射击与射击效果
     private void Shoot(Vector2 mousePosition)
     {
         shotsNumber++;
@@ -82,13 +89,43 @@ public class PlayerGun : MonoBehaviour
 
 
         Vector2 shootDirection = GetShootDirection(mousePosition);
-        
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, shootDirection, 100, whatToHit);
+        if (hit.collider != null)
+        {
+            ShootEffect(hit);
+        }
+        else
+        {
+            ShootEffect(shootDirection);
+        }
+    }
+
+    private void ShootEffect(Vector2 shootDirection)
+    {
         float trailAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
         Quaternion trailRotation = Quaternion.AngleAxis(trailAngle, Vector3.forward);
         Transform trail = Instantiate(shootTrail, firePoint.position, trailRotation);
         Destroy(trail.gameObject, 0.05f);
 
         // Debug.DrawLine(firePointPosition, shootDirection * 100, Color.red);
+
+        MuzzleFlash();
+    }
+
+    private void ShootEffect(RaycastHit2D hit)
+    {
+        Vector3 firePointPosition = firePoint.position;
+        Transform trail = Instantiate(shootTrail, firePointPosition, Quaternion.identity);
+        LineRenderer lineRenderer = trail.GetComponent<LineRenderer>();
+        Vector3 endPosition = new Vector3(hit.point.x, hit.point.y, firePointPosition.z);
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.SetPosition(0, firePointPosition);
+        lineRenderer.SetPosition(1, endPosition);
+        Destroy(trail.gameObject, 0.05f);
+
+        //打击效果
+        Transform sparks = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(sparks.gameObject, 0.2f);
 
         MuzzleFlash();
     }
@@ -103,6 +140,7 @@ public class PlayerGun : MonoBehaviour
         Destroy(flash.gameObject, 0.05f);
 
     }
+    #endregion
 
     #region 射击方向修正
 
