@@ -41,6 +41,10 @@ public class WaveManager : MonoBehaviour
 
             for (int i = 0; i < _currentWave.count; i++)
             {
+                if (playerEntity == null)
+                {
+                    yield break;
+                }
                 int spawnIndex = Random.Range(0, spawnPoints.Length);
                 Beetle beetle = Instantiate(_currentWave.beetle, spawnPoints[spawnIndex].position, Quaternion.identity);
                 beetle.target = playerEntity.transform;
