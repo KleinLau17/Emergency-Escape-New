@@ -26,6 +26,7 @@ public class WaveManager : MonoBehaviour
         }
 
         playerEntity.OnDeath += OnPlayerDeath;
+        //GameEvents.GameOver += OnPlayerDeath;
 
         StartCoroutine(NextWaveCoroutine());
     }
@@ -61,6 +62,5 @@ public class WaveManager : MonoBehaviour
     private void OnPlayerDeath()
     {
         StopCoroutine(NextWaveCoroutine());
-        Debug.Log("Game Over!!!");
     }
 }
