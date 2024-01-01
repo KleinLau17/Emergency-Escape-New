@@ -290,5 +290,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8fa56e156ab0d408b9ff9f9a2de204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 30
+  startHealth: 200
   deathParticle: {fileID: 4856390713903934532, guid: 8297e7907d0dee54cac32ea4d41cfdf9, type: 3}
