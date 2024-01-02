@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TinyCore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,10 +28,12 @@ public class MenuForm : MonoBehaviour
     {
         if (currentSelection == onToggle)
         {
+            SoundManager.Instance.PlaySound("Finger Snap");
+
             switch (toggle.name)
             {
                 case "GameStart":
-                    SceneManager.LoadScene("Game");
+                    SceneManager.LoadScene("Main");
                     break;
                 case "Settings":
                     //TODO
@@ -54,6 +57,8 @@ public class MenuForm : MonoBehaviour
         {
             onToggle = toggle;
             onToggle.transform.Find("Label").GetComponent<TMP_Text>().color = Color.yellow;
+
+            SoundManager.Instance.PlaySound("Select");
         }
         else
         {

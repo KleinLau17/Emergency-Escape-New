@@ -33,7 +33,7 @@ public class GameOverForm : MonoBehaviour
 
     private void OnRestartButtonClick()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Main");
     }
 
     private void OnQuitButtonClick()

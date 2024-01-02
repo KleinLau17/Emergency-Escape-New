@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TinyCore;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private Transform shootTrail;
     [SerializeField] private Transform muzzleFlash;
     [SerializeField] private Transform hitParticle;
+    [SerializeField] private TMP_Text remainingBulletText;
+
+    private string remainingBulletCount => (clipSize - shotsNumber).ToString();
 
     //武器系统
     [Header("武器属性")]
@@ -22,6 +27,11 @@ public class PlayerGun : MonoBehaviour
     public int fireRate;
     public float reloadTime;
     public bool isTriggerReleased;
+
+    private void Start()
+    {
+        remainingBulletText.SetText(remainingBulletCount);
+    }
 
     public void OnTriggerHold(Vector2 mousePosition){
         if (isReloading) return;
@@ -73,9 +83,12 @@ public class PlayerGun : MonoBehaviour
         Debug.Log("重新装弹");
         isReloading = true;
         playerController.SetShootingState(false);
+        SoundManager.Instance.PlaySound("Assault Reload");
         yield return new WaitForSeconds(reloadTime);
+        //after reloading
         shotsNumber = 0;
         isReloading = false;
+        remainingBulletText.SetText(remainingBulletCount);
     }
 
     #endregion
@@ -85,7 +98,8 @@ public class PlayerGun : MonoBehaviour
     {
         shotsNumber++;
         playerController.SetShootingState(true);
-        Debug.Log("Shoot");
+        SoundManager.Instance.PlaySound("Assault Shoot");
+        remainingBulletText.SetText(remainingBulletCount);
 
 
         Vector2 shootDirection = GetShootDirection(mousePosition);

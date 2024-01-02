@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using TinyCore;
 
 public class PopupText : MonoBehaviour
 {
     public static void Create(Vector3 position, int damageAmount, bool isCriticalHit)
     {
-        PopupText popupText = Instantiate(ResourceManager.Instance.popupText, position, Quaternion.identity);
+        PopupText popupText = Instantiate(ResourceManager.Instance.Load<PopupText>("PopupText"), position, Quaternion.identity);
         popupText.Setup(damageAmount, isCriticalHit);
     }
 

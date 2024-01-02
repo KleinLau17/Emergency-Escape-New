@@ -10,14 +10,15 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 _moveDirection;
     private Rigidbody2D _rigidbody2D;
-    private Animator _animator;
     private Camera _mainCamera;
     private PlayerGun _playerGun;
+
+    [SerializeField] private Transform playerBody;
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
         _mainCamera = Camera.main;
         _playerGun = GetComponentInChildren<PlayerGun>();
         if (_mainCamera == null)
@@ -32,12 +33,12 @@ public class PlayerController : MonoBehaviour
         _moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _moveDirection *= moveSpeed;
 
-        _animator.SetFloat("Move Speed", Mathf.Abs(_moveDirection.x) + Mathf.Abs(_moveDirection.y));
+        animator.SetFloat("Move Speed", Mathf.Abs(_moveDirection.x) + Mathf.Abs(_moveDirection.y));
 
         //转向 瞄准
-        Vector3 direction = Input.mousePosition - _mainCamera.WorldToScreenPoint(transform.position);
+        Vector3 direction = Input.mousePosition - _mainCamera.WorldToScreenPoint(playerBody.position);
         float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(-angle, Vector3.forward);
+        playerBody.rotation = Quaternion.AngleAxis(-angle, Vector3.forward);
 
         //输入
         if (Input.GetMouseButton(0))
@@ -66,6 +67,6 @@ public class PlayerController : MonoBehaviour
 
     public void SetShootingState(bool isShooting)
     {
-        _animator.SetBool("IsShooting", isShooting);
+        animator.SetBool("IsShooting", isShooting);
     }
 }

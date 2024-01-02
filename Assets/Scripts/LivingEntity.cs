@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TinyCore;
 using UnityEngine;
 
 public class LivingEntity : MonoBehaviour, IDamageable
@@ -10,6 +11,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
     protected bool IsDead;
 
     public ParticleSystem deathParticle;
+    public string deathSound;
 
     public event Action OnDeath;
 
@@ -37,5 +39,11 @@ public class LivingEntity : MonoBehaviour, IDamageable
 
         ParticleSystem ps = Instantiate(deathParticle, transform.position, Quaternion.identity);
         Destroy(ps.gameObject, ps.main.duration);
+
+        //À¿Õˆ“Ù–ß
+        if (!string.IsNullOrEmpty(deathSound))
+        {
+            SoundManager.Instance.PlaySound(deathSound);
+        }
     }
 }

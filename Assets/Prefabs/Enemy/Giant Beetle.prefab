@@ -230,6 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 50
   deathParticle: {fileID: 2355207476794573465, guid: f2accf878853ecd4e880bcb790159951, type: 3}
+  deathSound: Enemy Death
   target: {fileID: 0}
   aiPath: {fileID: 1985781835570136107}
   whatToHit:
