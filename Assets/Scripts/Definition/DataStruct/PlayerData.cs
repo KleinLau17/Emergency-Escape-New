@@ -48,7 +48,7 @@ public class PlayerData
     public PlayerData()
     {
         Vitality = 150;
-        Agility = 100;
+        Agility = 150;
         Accuracy = 50;
 
         WeaponData = new WeaponData(10, 21, 7, 10, 1.5f);
