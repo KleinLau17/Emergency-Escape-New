@@ -14,37 +14,39 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private Transform hitParticle;
     [SerializeField] private TMP_Text remainingBulletText;
 
-    private string remainingBulletCount => (clipSize - shotsNumber).ToString();
+    private string remainingBulletCount => (playerData.ClipSize - shotsNumber).ToString();
     private PlayerData playerData;
 
     //ÎäÆ÷ÏµÍ³
     [Header("ÎäÆ÷ÊôÐÔ")]
     public LayerMask whatToHit;
-    public FireMode FireMode = FireMode.Burst;
-    public bool isReloading;
-    public float nextShotTime;
-    public int shotsNumber;
-    public int clipSize;
-    public int fireRate;
-    public float reloadTime;
-    public bool isTriggerReleased;
+    public FireMode fireMode = FireMode.Burst;
+    private bool isReloading;
+    private float nextShotTime;
+    private int shotsNumber;
+
+    private bool isTriggerReleased;
 
     public void Init(PlayerData pd)
     {
         playerData = pd;
         remainingBulletText.SetText(remainingBulletCount);
+        if (fireMode == FireMode.Single)
+        {
+            isTriggerReleased = true;
+        }
     }
 
     public void OnTriggerHold(){
         if (isReloading) return;
 
-        if (shotsNumber >= clipSize)
+        if (shotsNumber >= playerData.ClipSize)
         {
             StartCoroutine(ReloadCoroutine());
             return;
         }
 
-        switch (FireMode)
+        switch (fireMode)
         {
             case FireMode.Single:
                 {
@@ -61,7 +63,7 @@ public class PlayerGun : MonoBehaviour
                         playerController.SetShootingState(false);
                         return;
                     }
-                    nextShotTime = Time.time + 1 / (float)fireRate;
+                    nextShotTime = Time.time + 1 / (float)playerData.FireRate;
                     Shoot();
                     break;
                 }
@@ -86,7 +88,7 @@ public class PlayerGun : MonoBehaviour
         isReloading = true;
         playerController.SetShootingState(false);
         SoundManager.Instance.PlaySound("Assault Reload");
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(playerData.ReloadTime);
         //after reloading
         shotsNumber = 0;
         isReloading = false;
@@ -149,8 +151,9 @@ public class PlayerGun : MonoBehaviour
         IDamageable damageable = hit.transform.transform.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(10);
-            PopupText.Create(hit.point, Random.Range(1, 100), Random.Range(0, 100) < 30);
+            (int damage, bool isCriticalHit) = playerData.CalculateDamage();
+            damageable.TakeDamage(damage);
+            PopupText.Create(hit.point, damage, isCriticalHit);
         }
         
         MuzzleFlash();
