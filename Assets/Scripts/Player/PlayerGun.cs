@@ -15,6 +15,7 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private TMP_Text remainingBulletText;
 
     private string remainingBulletCount => (clipSize - shotsNumber).ToString();
+    private PlayerData playerData;
 
     //Œ‰∆˜œµÕ≥
     [Header("Œ‰∆˜ Ù–‘")]
@@ -28,8 +29,9 @@ public class PlayerGun : MonoBehaviour
     public float reloadTime;
     public bool isTriggerReleased;
 
-    private void Start()
+    public void Init(PlayerData pd)
     {
+        playerData = pd;
         remainingBulletText.SetText(remainingBulletCount);
     }
 
@@ -158,8 +160,8 @@ public class PlayerGun : MonoBehaviour
     {
         Vector2 shotDir = transform.up;
 
-        shotDir.x += Random.Range(-0.15f, 0.15f);
-        shotDir.y += Random.Range(-0.15f, 0.15f);
+        shotDir.x += Random.Range(-playerData.AimOffset, playerData.AimOffset);
+        shotDir.y += Random.Range(-playerData.AimOffset, playerData.AimOffset);
 
         return shotDir.normalized;
     }

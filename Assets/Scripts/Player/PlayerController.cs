@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 12.0f;
+    private float _moveSpeed = 12.0f;
 
     private Vector2 _moveDirection;
     private Rigidbody2D _rigidbody2D;
@@ -27,11 +27,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Init(float moveSpeed)
+    {
+        _moveSpeed = moveSpeed;
+    }
+
     private void Update()
     {
         //ÒÆ¶¯
         _moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        _moveDirection *= moveSpeed;
+        _moveDirection *= _moveSpeed;
 
         animator.SetFloat("Move Speed", Mathf.Abs(_moveDirection.x) + Mathf.Abs(_moveDirection.y));
 

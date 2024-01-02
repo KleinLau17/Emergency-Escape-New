@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class Player : LivingEntity
 {
+    private PlayerData playerData;
+
     protected override void Start()
     {
+        playerData = new PlayerData();
+        startHealth = playerData.Health;
+
         base.Start();
+
+        //init player control
+        GetComponent<PlayerController>().Init(playerData.MoveSpeed);
+
+        //init weapon system
+        GetComponentInChildren<PlayerGun>().Init(playerData);
+
         GameEvents.OnPlayerHealthChanged?.Invoke(Health, startHealth);
     }
 

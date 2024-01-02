@@ -26,6 +26,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
 
         if (Health > 0 || IsDead) return;
 
+        Health = 0;
         IsDead = true;
         OnDeath?.Invoke();
 
