@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             //¿Û¶¯°â»ú
-            _playerGun.OnTriggerHold(_mainCamera.ScreenToWorldPoint(Input.mousePosition));
+            _playerGun.OnTriggerHold();
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -63,6 +63,11 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _rigidbody2D.AddForce(_moveDirection, ForceMode2D.Impulse);
+    }
+
+    public void KnockBack()
+    {
+        _rigidbody2D.AddRelativeForce(-playerBody.up * 180, ForceMode2D.Force);
     }
 
     public void SetShootingState(bool isShooting)

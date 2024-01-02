@@ -21,4 +21,14 @@ public class Player : LivingEntity
 
         GameEvents.OnPlayerHealthChanged?.Invoke(Health, startHealth);
     }
+
+    [ContextMenu("Suicide")]
+    public void Suicide()
+    {
+        if (!Application.isPlaying)
+        {
+            return;
+        }
+        TakeDamage(999);
+    }
 }

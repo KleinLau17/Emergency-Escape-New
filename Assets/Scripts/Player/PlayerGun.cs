@@ -33,7 +33,7 @@ public class PlayerGun : MonoBehaviour
         remainingBulletText.SetText(remainingBulletCount);
     }
 
-    public void OnTriggerHold(Vector2 mousePosition){
+    public void OnTriggerHold(){
         if (isReloading) return;
 
         if (shotsNumber >= clipSize)
@@ -48,7 +48,7 @@ public class PlayerGun : MonoBehaviour
                 {
                     playerController.SetShootingState(false);
                     if (!isTriggerReleased) return;
-                    Shoot(mousePosition);
+                    Shoot();
                     isTriggerReleased = false;
                     break;
                 }
@@ -60,7 +60,7 @@ public class PlayerGun : MonoBehaviour
                         return;
                     }
                     nextShotTime = Time.time + 1 / (float)fireRate;
-                    Shoot(mousePosition);
+                    Shoot();
                     break;
                 }
         }
@@ -94,7 +94,7 @@ public class PlayerGun : MonoBehaviour
     #endregion
 
     #region 射击与射击效果
-    private void Shoot(Vector2 mousePosition)
+    private void Shoot()
     {
         shotsNumber++;
         playerController.SetShootingState(true);
@@ -102,7 +102,7 @@ public class PlayerGun : MonoBehaviour
         remainingBulletText.SetText(remainingBulletCount);
 
 
-        Vector2 shootDirection = GetShootDirection(mousePosition);
+        Vector2 shootDirection = GetShootDirection();
         RaycastHit2D hit = Physics2D.Raycast(firePoint.position, shootDirection, 100, whatToHit);
         if (hit.collider != null)
         {
@@ -112,6 +112,8 @@ public class PlayerGun : MonoBehaviour
         {
             ShootEffect(shootDirection);
         }
+
+        playerController.KnockBack();
     }
 
     private void ShootEffect(Vector2 shootDirection)
@@ -152,6 +154,16 @@ public class PlayerGun : MonoBehaviour
         MuzzleFlash();
     }
 
+    private Vector2 GetShootDirection()
+    {
+        Vector2 shotDir = transform.up;
+
+        shotDir.x += Random.Range(-0.15f, 0.15f);
+        shotDir.y += Random.Range(-0.15f, 0.15f);
+
+        return shotDir.normalized;
+    }
+
     //枪口火光
     private void MuzzleFlash()
     {
@@ -162,18 +174,5 @@ public class PlayerGun : MonoBehaviour
         Destroy(flash.gameObject, 0.05f);
 
     }
-    #endregion
-
-    #region 射击方向修正
-
-    private Vector2 GetShootDirection(Vector2 mousePosition)  
-    {
-        if (Vector2.Distance(mousePosition, firePoint.position) > 0.5f)
-        {
-            return mousePosition - (Vector2)firePoint.position;
-        }
-        return transform.up;
-    }
-
     #endregion
 }
